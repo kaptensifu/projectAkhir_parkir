@@ -109,6 +109,11 @@ public class petugasKeluar extends petugasMenu {
         reset.setBackground(new java.awt.Color(0, 0, 0));
         reset.setForeground(new java.awt.Color(255, 255, 255));
         reset.setText("Reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,6 +192,12 @@ public class petugasKeluar extends petugasMenu {
         idParkir.setText(tabelparkir.getValueAt(baris,0).toString());
         jenisKendaraan=tabelparkir.getValueAt(baris,3).toString();
     }//GEN-LAST:event_tabelparkirMouseClicked
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        idParkir.setText("");
+        jenisKendaraan="";
+    }//GEN-LAST:event_resetActionPerformed
 
     /**
      * @param args the command line arguments
