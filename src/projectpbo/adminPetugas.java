@@ -5,6 +5,12 @@
  */
 package projectpbo;
 
+import javax.swing.JPasswordField;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import controller.usercontroller;
+
 /**
  *
  * @author abaym
@@ -14,8 +20,11 @@ public class adminPetugas extends adminMenu {
     /**
      * Creates new form adminPetugas
      */
+    usercontroller dc;
     public adminPetugas() {
         initComponents();
+        dc= new usercontroller(this);
+        dc.isitabel();
     }
 
     /**
@@ -28,7 +37,7 @@ public class adminPetugas extends adminMenu {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabeluser = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -38,10 +47,12 @@ public class adminPetugas extends adminMenu {
         update = new javax.swing.JButton();
         delete = new javax.swing.JButton();
         reset = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabeluser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,7 +63,12 @@ public class adminPetugas extends adminMenu {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabeluser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabeluserMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabeluser);
 
         jLabel1.setText("Username");
 
@@ -69,6 +85,11 @@ public class adminPetugas extends adminMenu {
 
         input.setBackground(new java.awt.Color(51, 255, 51));
         input.setText("Input");
+        input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputActionPerformed(evt);
+            }
+        });
 
         update.setBackground(new java.awt.Color(51, 153, 255));
         update.setText("Update");
@@ -80,6 +101,11 @@ public class adminPetugas extends adminMenu {
 
         delete.setBackground(new java.awt.Color(204, 0, 0));
         delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
 
         reset.setBackground(new java.awt.Color(0, 0, 0));
         reset.setForeground(new java.awt.Color(255, 255, 255));
@@ -87,6 +113,15 @@ public class adminPetugas extends adminMenu {
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ID");
+
+        id.setEditable(false);
+        id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActionPerformed(evt);
             }
         });
 
@@ -99,6 +134,14 @@ public class adminPetugas extends adminMenu {
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(input, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(33, 33, 33))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,42 +150,41 @@ public class adminPetugas extends adminMenu {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(input, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(33, 33, 33)))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(id))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(13, 13, 13)
                         .addComponent(input)
                         .addGap(18, 18, 18)
                         .addComponent(update)
                         .addGap(18, 18, 18)
                         .addComponent(delete)
                         .addGap(18, 18, 18)
-                        .addComponent(reset))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(reset)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -154,6 +196,9 @@ public class adminPetugas extends adminMenu {
     }//GEN-LAST:event_usernameActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        dc.update();
+        JOptionPane.showMessageDialog(this, "Berhasil diupdate");
+        dc.isitabel();
         // TODO add your handling code here:
     }//GEN-LAST:event_updateActionPerformed
 
@@ -162,6 +207,33 @@ public class adminPetugas extends adminMenu {
         username.setText("");
         password.setText("");
     }//GEN-LAST:event_resetActionPerformed
+
+    private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
+        dc.insert();
+        JOptionPane.showMessageDialog(this, "Berhasil ditambahkan");
+        dc.isitabel();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputActionPerformed
+
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idActionPerformed
+
+    private void tabeluserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeluserMouseClicked
+        int baris=tabeluser.getSelectedRow();
+        id.setText(tabeluser.getValueAt(baris,0).toString());
+        username.setText(tabeluser.getValueAt(baris,1).toString());
+        password.setText(tabeluser.getValueAt(baris,2).toString());
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabeluserMouseClicked
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        dc.delete();
+        JOptionPane.showMessageDialog(this, "Berhasil dihapus");
+        dc.isitabel();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,21 +266,59 @@ public class adminPetugas extends adminMenu {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new adminPetugas().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton delete;
+    private javax.swing.JTextField id;
     private javax.swing.JButton input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPasswordField password;
     private javax.swing.JButton reset;
+    private javax.swing.JTable tabeluser;
     private javax.swing.JButton update;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
+
+    public JPasswordField getPassword() {
+        return password;
+    }
+
+    public void setPassword(JPasswordField password) {
+        this.password = password;
+    }
+
+    public JTable getTabeluser() {
+        return tabeluser;
+    }
+
+    public void setTabeluser(JTable tabeluser) {
+        this.tabeluser = tabeluser;
+    }
+
+    public JTextField getUsername() {
+        return username;
+    }
+
+    public void setUsername(JTextField username) {
+        this.username = username;
+    }
+
+    public JTextField getId() {
+        return id;
+    }
+
+    public void setId(JTextField id) {
+        this.id = id;
+    }
+    
+
+    
 }

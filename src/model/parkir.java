@@ -10,21 +10,21 @@ package model;
  * @author abaym
  */
 public class parkir {
-    private String idParkir;
+    private int idParkir;
     private String noPlat;
     private String merkKendaraan;
     private String jenisKendaraan;
     private String jamMasuk;
     private double lamaParkir;
-    private int biaya;
+    private static int biaya;
     private final int hargaMotor=2000;
     private final int hargaMobil=5000;
 
-    public String getIdParkir() {
+    public int getIdParkir() {
         return idParkir;
     }
 
-    public void setIdParkir(String idParkir) {
+    public void setIdParkir(int idParkir) {
         this.idParkir = idParkir;
     }
 
@@ -68,7 +68,7 @@ public class parkir {
         this.lamaParkir = lamaParkir;
     }
 
-    public int getBiaya() {
+    public static int getBiaya() {
         return biaya;
     }
 

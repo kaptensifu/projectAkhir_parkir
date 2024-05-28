@@ -11,5 +11,8 @@ import model.parkir;
  * @author abaym
  */
 public interface dataparkir {
-    
+    public void insert(parkir p);
+    public void update(parkir p);
+    public void delete(parkir p);
+    public List<parkir>getAll();
 }

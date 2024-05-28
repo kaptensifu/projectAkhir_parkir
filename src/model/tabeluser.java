@@ -32,10 +32,12 @@ public class tabeluser extends AbstractTableModel{
     public String getColumnName(int column){
         switch(column){
             case 0:
-                return "USERNAME";
+                return "ID";
             case 1:
-                return "PASSWORD";
+                return "USERNAME";
             case 2:
+                return "PASSWORD";
+            case 3:
                 return "ROLE";
             default:
                 return null;
@@ -46,10 +48,12 @@ public class tabeluser extends AbstractTableModel{
     public Object getValueAt(int row, int column) {
         switch(column){
             case 0:
-                return dp.get(row).getUsername();
+                return dp.get(row).getId();
             case 1:
-                return dp.get(row).getPassword();
+                return dp.get(row).getUsername();
             case 2:
+                return dp.get(row).getPassword();
+                case 3:
                 return dp.get(row).getRole();
             default:
                 return null;

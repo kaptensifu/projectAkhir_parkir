@@ -13,6 +13,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.JTable;
+
+import javax.swing.JOptionPane;
+import controller.parkircontroller;
+import controller.parkirpetugascontroller;
 /**
  *
  * @author abaym
@@ -22,6 +27,7 @@ public class petugasBuat extends petugasMenu {
     /**
      * Creates new form petugasBuat
      */
+    parkirpetugascontroller dc;
     public petugasBuat() {
         initComponents();
         showDayDateTime();
@@ -32,6 +38,7 @@ public class petugasBuat extends petugasMenu {
             }
         });
         timer.start();
+        dc= new parkirpetugascontroller(this);
     }
 
     /**
@@ -85,6 +92,11 @@ public class petugasBuat extends petugasMenu {
 
         input.setBackground(new java.awt.Color(51, 255, 51));
         input.setText("Input");
+        input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputActionPerformed(evt);
+            }
+        });
 
         reset.setBackground(new java.awt.Color(0, 0, 0));
         reset.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,6 +199,18 @@ public class petugasBuat extends petugasMenu {
         // TODO add your handling code here:
         setJenis("mobil");
     }//GEN-LAST:event_mobilActionPerformed
+
+    private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
+        
+        
+        try {
+            dc.insert();
+            JOptionPane.showMessageDialog(this, "Plat Kendaraan "+plat.getText()+" Berhasil Membuat Karcis Parkir");
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        } 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputActionPerformed
 
     /**
      * @param args the command line arguments

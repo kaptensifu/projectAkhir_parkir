@@ -5,12 +5,17 @@
  */
 package projectpbo;
 
+import controller.parkirpetugascontroller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.Timer;
+import model.parkir;
 
 /**
  *
@@ -21,6 +26,7 @@ public class petugasKeluar extends petugasMenu {
     /**
      * Creates new form petugasKeluar
      */
+    parkirpetugascontroller ac;
     public petugasKeluar() {
         initComponents();
         showDayDateTime();
@@ -31,6 +37,8 @@ public class petugasKeluar extends petugasMenu {
             }
         });
         timer.start();
+        ac= new parkirpetugascontroller(this);
+        ac.isitabel(this);
     }
 
     /**
@@ -45,7 +53,7 @@ public class petugasKeluar extends petugasMenu {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelparkir = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lamaParkir = new javax.swing.JTextField();
@@ -59,7 +67,7 @@ public class petugasKeluar extends petugasMenu {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("PARKIR KELUAR");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelparkir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,7 +78,12 @@ public class petugasKeluar extends petugasMenu {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelparkir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelparkirMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelparkir);
 
         jLabel1.setText("Id Parkir : ");
 
@@ -160,7 +173,20 @@ public class petugasKeluar extends petugasMenu {
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
+        try {
+            ac.update();
+            JOptionPane.showMessageDialog(this, "Biaya yang harus dibayarkan = " + parkir.getBiaya());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        } 
     }//GEN-LAST:event_updateActionPerformed
+
+    private void tabelparkirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelparkirMouseClicked
+        // TODO add your handling code here:
+        int baris=tabelparkir.getSelectedRow();
+        idParkir.setText(tabelparkir.getValueAt(baris,0).toString());
+        jenisKendaraan=tabelparkir.getValueAt(baris,3).toString();
+    }//GEN-LAST:event_tabelparkirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -213,10 +239,45 @@ public class petugasKeluar extends petugasMenu {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lamaParkir;
     private javax.swing.JButton reset;
+    private javax.swing.JTable tabelparkir;
     private javax.swing.JLabel tanggal;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
+    private String jenisKendaraan;
+
+    public String getJenisKendaraan() {
+        return jenisKendaraan;
+    }
+
+    public void setJenisKendaraan(String jenisKendaraan) {
+        this.jenisKendaraan = jenisKendaraan;
+    }
+
+    public JTextField getIdParkir() {
+        return idParkir;
+    }
+
+    public void setIdParkir(JTextField idParkir) {
+        this.idParkir = idParkir;
+    }
+
+    public JTextField getLamaParkir() {
+        return lamaParkir;
+    }
+
+    public void setLamaParkir(JTextField lamaParkir) {
+        this.lamaParkir = lamaParkir;
+    }
+
+    public JTable getTabelparkir() {
+        return tabelparkir;
+    }
+
+    public void setTabelparkir(JTable tabelparkir) {
+        this.tabelparkir = tabelparkir;
+    }
+    
+    
 }

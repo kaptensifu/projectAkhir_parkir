@@ -19,6 +19,9 @@ public class ProjectPBO {
         loginMenu v = new loginMenu();
         v.setVisible(true);
         v.setLocationRelativeTo(null);
+        
+        
+        
     }
     
 }

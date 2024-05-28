@@ -5,6 +5,11 @@
  */
 package projectpbo;
 
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import controller.parkircontroller;
+
 /**
  *
  * @author abaym
@@ -14,8 +19,11 @@ public class adminRiwayat extends adminMenu {
     /**
      * Creates new form adminRiwayat
      */
+    parkircontroller ac;
     public adminRiwayat() {
         initComponents();
+        ac= new parkircontroller(this);
+        ac.isitabel();
     }
 
     /**
@@ -29,10 +37,10 @@ public class adminRiwayat extends adminMenu {
 
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelparkir = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        id = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        id_parkir = new javax.swing.JTextField();
+        hapus = new javax.swing.JButton();
         reset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,7 +48,7 @@ public class adminRiwayat extends adminMenu {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("DATA PARKIR");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelparkir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -51,13 +59,29 @@ public class adminRiwayat extends adminMenu {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelparkir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelparkirMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelparkir);
 
         jLabel1.setText("ID Parkir");
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 0));
-        jButton1.setText("Delete");
-        jButton1.setToolTipText("");
+        id_parkir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_parkirActionPerformed(evt);
+            }
+        });
+
+        hapus.setBackground(new java.awt.Color(204, 0, 0));
+        hapus.setText("Delete");
+        hapus.setToolTipText("");
+        hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusActionPerformed(evt);
+            }
+        });
 
         reset.setBackground(new java.awt.Color(0, 0, 0));
         reset.setForeground(new java.awt.Color(255, 255, 255));
@@ -84,13 +108,13 @@ public class adminRiwayat extends adminMenu {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(id)
+                        .addComponent(id_parkir)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 46, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(47, 47, 47))))
         );
         layout.setVerticalGroup(
@@ -104,9 +128,9 @@ public class adminRiwayat extends adminMenu {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(id_parkir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
-                        .addComponent(jButton1)
+                        .addComponent(hapus)
                         .addGap(18, 18, 18)
                         .addComponent(reset)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -117,8 +141,26 @@ public class adminRiwayat extends adminMenu {
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
-        id.setText("");
+        id_parkir.setText("");
     }//GEN-LAST:event_resetActionPerformed
+
+    private void tabelparkirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelparkirMouseClicked
+        int baris=tabelparkir.getSelectedRow();
+        id_parkir.setText(tabelparkir.getValueAt(baris,0).toString());
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelparkirMouseClicked
+
+    private void id_parkirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_parkirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_parkirActionPerformed
+
+    private void hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusActionPerformed
+        ac.delete();
+        JOptionPane.showMessageDialog(this, "Berhasil dihapus");
+        ac.isitabel();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,17 +193,37 @@ public class adminRiwayat extends adminMenu {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new adminRiwayat().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField id;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton hapus;
+    private javax.swing.JTextField id_parkir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton reset;
+    private javax.swing.JTable tabelparkir;
     // End of variables declaration//GEN-END:variables
+
+    
+    public JTextField getId_parkir() {
+        return id_parkir;
+    }
+
+    public void setId_parkir(JTextField id_parkir) {
+        this.id_parkir = id_parkir;
+    }
+    
+    public JTable getTabelparkir() {
+        return tabelparkir;
+    }
+
+    public void setTabelparkir(JTable tabelparkir) {
+        this.tabelparkir = tabelparkir;
+    }
+
+    
 }

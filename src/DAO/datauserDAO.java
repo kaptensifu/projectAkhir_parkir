@@ -18,9 +18,7 @@ import java.util.logging.Logger;
  */
 public class datauserDAO implements datauser{
     Connection connection;
-    
-    final String login  = "SELECT * FROM user WHERE username=?, password=?";
-    final String insert = "INSERT INTO `user`(`username`, `password`) VALUES (?,?)";
+    final String insert = "INSERT INTO `user`(`username`, `password`, role) VALUES (?,?,'petugas')";
     final String update = "UPDATE user SET username=?,password=? WHERE id=?";
     final String delete = "DELETE FROM user WHERE id=?";
     final String select = "SELECT * FROM user";
@@ -36,17 +34,65 @@ public class datauserDAO implements datauser{
 
     @Override
     public void insert(user u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = null;
+        try{
+            statement = connection.prepareStatement(insert, Statement .RETURN_GENERATED_KEYS);
+            statement.setString(1, u.getUsername());
+            statement.setString(2, u.getPassword());
+            
+            statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }finally{
+            try{
+                statement.close();;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void update(user u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = null;
+        try{
+            statement = connection.prepareStatement(update);
+            statement.setString(1, u.getUsername());
+            statement.setString(2, u.getPassword());
+                    
+            statement.setInt(3, u.getId());
+            statement.executeUpdate();
+            
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }finally{
+            try{
+                statement.close();;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void delete(user u) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = null;
+        try{
+            statement = connection.prepareStatement(delete);
+            statement.setInt(1, u.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally{
+            try{
+                statement.close();
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -58,6 +104,10 @@ public class datauserDAO implements datauser{
             ResultSet rs = st.executeQuery(select);
             while(rs.next()){
                 user b = new user();
+                b.setId(rs.getInt("id"));
+                b.setUsername(rs.getString("username"));
+                b.setPassword(rs.getString("password"));
+                b.setRole(rs.getString("role"));
                 dp.add(b);
             }
         }catch(SQLException ex){
