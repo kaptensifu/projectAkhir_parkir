@@ -15,4 +15,5 @@ public interface dataparkir {
     public void update(parkir p);
     public void delete(parkir p);
     public List<parkir>getAll();
+    public List<parkir>getAll2();
 }

@@ -25,7 +25,7 @@ public class tabelparkir extends AbstractTableModel{
     
     @Override
     public int getColumnCount() {
-        return 5;
+        return 7;
     }
     
     @Override
@@ -41,6 +41,10 @@ public class tabelparkir extends AbstractTableModel{
                 return "JENIS KENDARAAN";
             case 4:
                 return "JAM MASUK";
+            case 5:
+                return "LAMA PARKIR";
+            case 6:
+                return "BIAYA PARKIR";
             default:
                 return null;
         }
@@ -59,6 +63,10 @@ public class tabelparkir extends AbstractTableModel{
                 return dp.get(row).getJenisKendaraan();
             case 4:
                 return dp.get(row).getJamMasuk();
+            case 5:
+                return dp.get(row).getLamaParkir();
+            case 6:
+                return dp.get(row).getBiaya();
             default:
                 return null;
         }

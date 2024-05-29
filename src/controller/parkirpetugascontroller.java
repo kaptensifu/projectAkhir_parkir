@@ -21,6 +21,7 @@ public class parkirpetugascontroller {
     petugasBuat frameBuat;
     petugasKeluar frameKeluar;
     dataparkir impldataparkir;
+    public int biaya;
     List<parkir> dp;
     
     public parkirpetugascontroller(petugasRiwayat frame){
@@ -48,7 +49,7 @@ public class parkirpetugascontroller {
     }
     
     public void isitabel(petugasKeluar frameKeluar){
-        dp = impldataparkir.getAll();
+        dp = impldataparkir.getAll2();
         tabelparkir mp = new tabelparkir(dp);
         frameKeluar.getTabelparkir().setModel(mp);
     }
@@ -66,16 +67,19 @@ public class parkirpetugascontroller {
        dp.setLamaParkir(Integer.parseInt(frameKeluar.getLamaParkir().getText()));
         System.out.println(frameKeluar.getJenisKendaraan());
        if("mobil".equals(frameKeluar.getJenisKendaraan())){
-           dp.setBiaya(dp.menghitungMobil());
+           biaya=dp.menghitungMobil();
        }else{
-           dp.setBiaya(dp.menghitungMotor());
+           biaya=dp.menghitungMotor();
        }
        dp.setJenisKendaraan(frameKeluar.getJenisKendaraan());
        dp.setIdParkir(Integer.parseInt(frameKeluar.getIdParkir().getText()));
+       dp.setBiaya(biaya);
        impldataparkir.update(dp);
     }
     
     public void delete(){
-        
+        parkir dp = new parkir();
+        dp.setIdParkir(Integer.parseInt(frame.getId().getText()));
+        impldataparkir.delete(dp);
     }
 }

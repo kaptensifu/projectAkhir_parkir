@@ -3,24 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/model/tabelparkir.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/model/tabeluser.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/DAO/dataparkirDAO.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/DAOimplements/datauser.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/adminPetugas.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/controller/parkircontroller.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/DAO/datauserDAO.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/DAOimplements/dataparkir.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/koneksi/koneksi.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/model/user.java</file>
             <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/petugasKeluar.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/controller/usercontroller.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/loginMenu.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/model/parkir.java</file>
+            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/DAO/dataparkirDAO.java</file>
+            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/controller/parkircontroller.java</file>
+            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/controller/parkirpetugascontroller.java</file>
             <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/petugasBuat.java</file>
             <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/adminRiwayat.java</file>
-            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/ProjectPBO.java</file>
             <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/petugasRiwayat.java</file>
+            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/DAOimplements/dataparkir.java</file>
+            <file>file:/C:/Documents/NetBeansProjects/projectPBO/src/projectpbo/petugasMenu.java</file>
         </group>
     </open-files>
 </project-private>

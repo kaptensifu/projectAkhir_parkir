@@ -16,7 +16,7 @@ public class parkir {
     private String jenisKendaraan;
     private String jamMasuk;
     private double lamaParkir;
-    private static int biaya;
+    private int biaya;
     private final int hargaMotor=2000;
     private final int hargaMobil=5000;
 
@@ -68,7 +68,7 @@ public class parkir {
         this.lamaParkir = lamaParkir;
     }
 
-    public static int getBiaya() {
+    public int getBiaya() {
         return biaya;
     }
 

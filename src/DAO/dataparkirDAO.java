@@ -24,6 +24,7 @@ public class dataparkirDAO implements dataparkir{
     final String update = "UPDATE parkir SET lama_parkir=?, biaya_parkir=? WHERE id_parkir=?";
     final String delete = "DELETE FROM parkir WHERE id_parkir=?";
     final String select = "SELECT * FROM parkir";
+    final String select2 = "SELECT * FROM parkir WHERE biaya_parkir IS NULL";
     
     public dataparkirDAO(){
         connection = koneksi.connection();
@@ -108,6 +109,34 @@ public class dataparkirDAO implements dataparkir{
                 b.setMerkKendaraan(rs.getString("merk_kendaraan"));
                 b.setJenisKendaraan(rs.getString("jenis_kendaraan"));
                 b.setJamMasuk(rs.getString("jam_masuk"));
+                b.setLamaParkir(rs.getInt("lama_parkir"));
+                b.setBiaya(rs.getInt("biaya_parkir"));
+                
+                dp.add(b);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(datauserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dp;
+    }
+
+    @Override
+    public List<parkir> getAll2() {
+       List<parkir>dp = null;
+        try{
+            dp=new ArrayList<parkir>();
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(select2);
+            while(rs.next()){
+                parkir b = new parkir();
+                b.setIdParkir(rs.getInt("id_parkir"));
+                b.setNoPlat(rs.getString("no_plat"));
+                b.setMerkKendaraan(rs.getString("merk_kendaraan"));
+                b.setJenisKendaraan(rs.getString("jenis_kendaraan"));
+                b.setJamMasuk(rs.getString("jam_masuk"));
+                b.setLamaParkir(rs.getInt("lama_parkir"));
+                b.setBiaya(rs.getInt("biaya_parkir"));
+                
                 dp.add(b);
             }
         }catch(SQLException ex){
